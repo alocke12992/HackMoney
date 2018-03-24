@@ -1,5 +1,4 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { addItem, updateItem } from '../actions/items';
 import { Form, Grid, Image } from 'semantic-ui-react';
@@ -7,13 +6,10 @@ import { Form, Grid, Image } from 'semantic-ui-react';
 class EditItemForm extends React.Component {
 
   initialState = {
-    name: '', description: '', price: '', file: '',
+    name: '', description: '', price: '', image: ''
   }
   state = { ...this.initialState }
 
-  onDrop = ( files ) => {
-    this.setState( { initialState: { ...this.state, file: files[0] } } )
-  }
 
 
   componentDidMount() {
@@ -22,48 +18,46 @@ class EditItemForm extends React.Component {
   }
 
   handleChange = ( e ) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     this.setState( { [name]: value } )
   }
 
   handleSubmit = ( e ) => {
-    e.preventDefault();
+    e.preventDefault()
     const item = { ...this.state }
-    const { dispatch, closeForm } = this.props;
+    const { closeForm, dispatch } = this.props
     const func = this.props.id ? updateItem : addItem
     dispatch( func( item ) )
-    this.setState( { ...this.initialState } )
-    closeForm();
+    closeForm()
   }
 
   render() {
-    const { name, description, price, file, } = this.state
+    const { name, description, price, image } = this.props
     return (
       <Form onSubmit={ this.handleSubmit }>
-        <Dropzone
-          onDrop={ this.onDrop }
-          multiple={ false }
-
-        >
-          { file && <Image src={ file.preview } /> }
-        </Dropzone>
-
+        <Form.Input
+          name="image"
+          required
+          value={ image }
+          onChange={ this.handleChange }
+          label="Image"
+        />
         <Form.Input
           name="name"
           required
-          value={ name }
+          defaultValue={ name }
           onChange={ this.handleChange }
           label="Name"
         />
         <Form.TextArea
           name="description"
-          value={ description }
+          defaultValue={ description }
           onChange={ this.handleChange }
           label="Description"
         />
         <Form.Input
           name="price"
-          value={ price }
+          defaultValue={ price }
           type="number"
           min="0"
           onChange={ this.handleChange }

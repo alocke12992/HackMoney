@@ -20,27 +20,10 @@ class Api::ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    item.name = params[:name]
-    item.description = params[:description]
-    item.price = params[:price]
-    s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
-    s3_bucket = ENV['BUCKET']
-    file = params[:file]
-    begin
-      if !file.blank? 
-        ext = File.extname(file.tempfile)
-        obj = s3.bucket(s3_bucket).object("avatars/#{item.id}#{ext}")
-        obj.upload_file(file.tempfile, acl: 'public-read')
-        item.image = obj.public_url
-      end 
-    if item.save
-      render json: item
+    if @item.update(item_params)
+      render json: @item
     else
       render json: { errors: @item.errors.full_messages.join(',') }, status: 422
-    end
-    rescue => e
-      render json: { errors: e }, status: 422
     end
   end
 
@@ -54,6 +37,6 @@ class Api::ItemsController < ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(:name, :description, :price)
+      params.require(:item).permit(:name, :description, :price, :file)
     end
 end
