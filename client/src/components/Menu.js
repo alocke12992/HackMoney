@@ -12,12 +12,24 @@ class Menu extends React.Component {
 
   componentDidMount() {
     this.props.dispatch( getItems() )
-  }
+  axios.get('/api/items')
+    .then( res => {
+      this.setState({ items: res.data })
+      this.props.dispatch({ type: 'HEADERS', headers: res.headers });
+  });
+}
 
+<<<<<<< HEAD
   addCart = ( id ) => {
     let { items } = this.state;
     axios.put( `/api/items/${ id }` )
       .then( () => this.setState( { cats: items.filter( c => c.id !== id ) } ) )
+=======
+  addItem = (id) => {
+  let { items } = this.state;
+  axios.put(`/api/items/${id}`)
+    .then( () => this.setState({ items: items.filter( c => c.id !== id ) }) )
+>>>>>>> adding carts controller
   }
 
   items = () => {
@@ -37,7 +49,11 @@ class Menu extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Button basic
+<<<<<<< HEAD
             onClick={ () => this.addCart( item.id ) }>Add to cart</Button>
+=======
+            onClick={ () => this.addItem(item.id)}>Add to cart</Button>
+>>>>>>> adding carts controller
         </Card.Content>
       </Card >
     )
