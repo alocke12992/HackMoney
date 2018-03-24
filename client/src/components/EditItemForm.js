@@ -6,10 +6,13 @@ import { Form, Grid, Image } from 'semantic-ui-react';
 
 class EditItemForm extends React.Component {
 
-  state = { formValues: { name: '', description: '', price: '', file: '', } }
+  initialState = {
+    name: '', description: '', price: '', file: '',
+  }
+  state = { ...this.initialState }
 
   onDrop = ( files ) => {
-    this.setState( { formValues: { ...this.state.formValues, file: files[0] } } )
+    this.setState( { initialState: { ...this.state, file: files[0] } } )
   }
 
 
@@ -20,12 +23,7 @@ class EditItemForm extends React.Component {
 
   handleChange = ( e ) => {
     const { name, value } = e.target;
-    this.setState( {
-      formValues: {
-        ...this.state.formValues,
-        [name]: value
-      }
-    } )
+    this.setState( { [name]: value } )
   }
 
   handleSubmit = ( e ) => {
@@ -39,7 +37,7 @@ class EditItemForm extends React.Component {
   }
 
   render() {
-    const { formValues: { name, description, price, file, } } = this.state
+    const { name, description, price, file, } = this.state
     return (
       <Form onSubmit={ this.handleSubmit }>
         <Dropzone

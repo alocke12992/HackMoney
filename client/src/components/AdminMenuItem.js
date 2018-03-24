@@ -1,13 +1,17 @@
 import React from 'react'
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
   Button,
   Container,
-  Card
+  Card,
+  Image,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import EditItemForm from './EditItemForm';
 import { deleteItem } from '../actions/items';
+
+const defaultImage = 'https://iqsresponsive-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/landscape-1471344808-avocado-burger-buns-680x340.jpg'
 
 class AdminMenuItem extends React.Component {
   state = { showForm: false }
@@ -36,15 +40,18 @@ class AdminMenuItem extends React.Component {
           <EditItemForm { ...item } closeForm={ this.toggleForm } />
           :
           <div>
-            < Card key={ item.id } >
-              <Card.Header as='h3'>
-                { item.name }
-              </Card.Header>
-              <Card.Content>
-                { item.description }
-              </Card.Content>
-              <Card.Content extra>
-                <Link to={ `/edit/${ item.id }` }>View Menu Item</Link>
+            < Card key={ item.id } as={ Transparent } >
+              <Image src={ item.image || defaultImage } />
+              <Card.Content style={ styles.text }>
+                <Card.Header as="h3">
+                  { item.name }
+                </Card.Header>
+                <Card.Meta>
+                  ${ item.price }
+                </Card.Meta>
+                <Card.Description>
+                  { item.description }
+                </Card.Description>
               </Card.Content>
             </Card >
           </div>
@@ -57,6 +64,17 @@ class AdminMenuItem extends React.Component {
         </Button>
       </Container>
     )
+  }
+}
+
+
+const Transparent = styled.div`
+  background: transparent !important; 
+`
+
+var styles = {
+  text: {
+    color: 'white'
   }
 }
 
