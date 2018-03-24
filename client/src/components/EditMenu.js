@@ -9,6 +9,7 @@ import { Segment, Card, Header, Button, Divider, Image } from 'semantic-ui-react
 
 const defaultImage = 'https://iqsresponsive-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/landscape-1471344808-avocado-burger-buns-680x340.jpg'
 
+
 class EditMenu extends React.Component {
   state = { category: '', showForm: false };
   componentDidMount() {

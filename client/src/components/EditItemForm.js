@@ -20,6 +20,7 @@ class EditItemForm extends React.Component {
   handleChange = ( e ) => {
     const { name, value } = e.target
     this.setState( { [name]: value } )
+
   }
 
   handleSubmit = ( e ) => {
@@ -33,6 +34,7 @@ class EditItemForm extends React.Component {
 
   render() {
     const { name, description, price, image } = this.props
+
     return (
       <Form onSubmit={ this.handleSubmit }>
         <Form.Input
