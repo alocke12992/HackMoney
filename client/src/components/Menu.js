@@ -19,10 +19,10 @@ class Menu extends React.Component {
       } );
   }
 
-  addItem = ( id ) => {
+  addCart = ( id ) => {
     let { items } = this.state;
     axios.put( `/api/items/${ id }` )
-      .then( () => this.setState( { items: items.filter( c => c.id !== id ) } ) )
+      .then( () => this.setState( { cats: items.filter( c => c.id !== id ) } ) )
   }
 
   items = () => {
@@ -42,7 +42,7 @@ class Menu extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Button basic
-            onClick={ () => this.addItem( item.id ) }>Add to cart</Button>
+            onClick={ () => this.addCart( items.id ) }>Add to cart</Button>
         </Card.Content>
       </Card >
     )
@@ -67,6 +67,7 @@ var styles = {
     background: `url(${ mainBackground }) no-repeat center fixed`,
     backgroundSize: 'cover',
     padding: 0,
+    height: '100vh'
   },
   text: {
     color: 'white'
