@@ -3,8 +3,9 @@ import mainBackground from '../images/mainBackground.jpg';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items';
-import { Segment, Card, Button, Divider } from 'semantic-ui-react';
+import { Segment, Card, Button, Divider, Image } from 'semantic-ui-react';
 
+const defaultImage = 'https://iqsresponsive-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/landscape-1471344808-avocado-burger-buns-680x340.jpg'
 
 class Menu extends React.Component {
 
@@ -15,13 +16,17 @@ class Menu extends React.Component {
   items = () => {
     return this.props.items.map( item =>
       < Card key={ item.id } as={ Transparent } >
-        <Card.Header as="h3" style={ styles.text }>
-          { item.name }
-        </Card.Header>
+        <Image src={ item.image || defaultImage } />
         <Card.Content style={ styles.text }>
-          { item.description }
-          <Divider hidden />
-          ${ item.price }
+          <Card.Header as="h3">
+            { item.name }
+          </Card.Header>
+          <Card.Meta>
+            ${ item.price }
+          </Card.Meta>
+          <Card.Description>
+            { item.description }
+          </Card.Description>
         </Card.Content>
         <Card.Content extra>
           <Button basic>Add to cart</Button>

@@ -1,24 +1,31 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { addItem, updateItem } from '../actions/items';
-import { Form } from 'semantic-ui-react';
+import { Form, Grid, Image } from 'semantic-ui-react';
 
 class EditItemForm extends React.Component {
-  initialState = {
-    name: '',
-    description: '',
-    price: '',
+
+  state = { formValues: { name: '', description: '', price: '', file: '', } }
+
+  onDrop = ( files ) => {
+    this.setState( { formValues: { ...this.state.formValues, file: files[0] } } )
   }
 
-  state = { ...this.initialState }
 
   componentDidMount() {
     if ( this.props.id )
       this.setState( { ...this.props } )
   }
+
   handleChange = ( e ) => {
     const { name, value } = e.target;
-    this.setState( { [name]: value } )
+    this.setState( {
+      formValues: {
+        ...this.state.formValues,
+        [name]: value
+      }
+    } )
   }
 
   handleSubmit = ( e ) => {
@@ -32,9 +39,17 @@ class EditItemForm extends React.Component {
   }
 
   render() {
-    const { name, description, price } = this.state
+    const { formValues: { name, description, price, file, } } = this.state
     return (
       <Form onSubmit={ this.handleSubmit }>
+        <Dropzone
+          onDrop={ this.onDrop }
+          multiple={ false }
+
+        >
+          { file && <Image src={ file.preview } /> }
+        </Dropzone>
+
         <Form.Input
           name="name"
           required

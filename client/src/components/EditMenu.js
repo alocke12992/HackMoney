@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { getItems } from '../actions/items';
 import { Segment, Card, Header, Button, Divider } from 'semantic-ui-react';
 
+
 class EditMenu extends React.Component {
   state = { category: '', showForm: false };
   componentDidMount() {
