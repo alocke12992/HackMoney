@@ -1,4 +1,4 @@
-Item = [ {
+items = [ {
 
   name: "Combonation Plate 1",
   description: "One Bean Tostada and One Beef Taco",
@@ -253,3 +253,14 @@ Item = [ {
   }
 
 ]
+
+items.each do |i|
+  Item.create(
+    name: i[:name],
+    description: i[:description],
+    price: i[:price],
+    image: i[:image],
+  )
+end
+
+puts "seeded"

@@ -3,17 +3,19 @@ import mainBackground from '../images/mainBackground.jpg';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items';
+import { setHeaders } from '../actions/headers';
 import { Segment, Card, Button, Divider, Image } from 'semantic-ui-react';
 import axios from 'axios';
 import { setFlash } from '../actions/flash'
 
-const defaultImage = 'https://iqsresponsive-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/landscape-1471344808-avocado-burger-buns-680x340.jpg'
+const defaultImage = "http://assets.kraftfoods.com/recipe_images/opendeploy/107771_640x428.jpg"
 
 class Menu extends React.Component {
 
   componentDidMount() {
+    const { dispatch } = this.props;
     this.props.dispatch( getItems() )
-  }
+    }
 
   addToCart = ( id ) => {
     axios.put( `/api/update_cart`, { user_id: this.props.user.id } )
