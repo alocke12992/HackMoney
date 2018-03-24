@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :items
      get '/index_cart', to: 'items#index_cart'
+     put '/update_cart', to: 'items#update_cart'
   end
 
   #Do not place any routes below this one

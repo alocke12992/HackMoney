@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getItems } from '../actions/items';
 import { Segment, Card, Button, Divider, Image } from 'semantic-ui-react';
 import axios from 'axios';
+import { setFlash } from '../actions/flash'
 
 const defaultImage = 'https://iqsresponsive-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/landscape-1471344808-avocado-burger-buns-680x340.jpg'
 
@@ -14,10 +15,12 @@ class Menu extends React.Component {
     this.props.dispatch( getItems() )
   }
 
-  addCart = ( id ) => {
-    let { items } = this.state;
-    axios.put( `/api/items/${ id }` )
-      .then( () => this.setState( { cats: items.filter( c => c.id !== id ) } ) )
+  addToCart = ( id ) => {
+    axios.put( `/api/update_cart`, { user_id: this.props.user.id } )
+      .then( res => {
+        this.props.dispatch( setFlash( 'Item Added to Cart', 'green' ) )
+        console.log( res )
+      } )
   }
 
   items = () => {
@@ -37,7 +40,7 @@ class Menu extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Button basic
-            onClick={ () => this.addCart( item.id ) }>Add to cart</Button>
+            onClick={ () => this.addToCart( item.id ) } style={ styles.pointer }>Add to cart</Button>
         </Card.Content>
       </Card >
     )
@@ -69,7 +72,7 @@ var styles = {
 }
 
 const mapStateToProps = ( state ) => {
-  return { items: state.items }
+  return { items: state.items, user: state.user }
 }
 
 export default connect( mapStateToProps )( Menu );

@@ -7,11 +7,9 @@ class User < ActiveRecord::Base
 
   serialize :cart_items, Array
 
-  def self.cart(ids)
+ def self.added(ids)
     ids = ids.empty? ? [0] : ids
     Item.where("id IN (?)", ids)
   end
-
-    has_many :items
 
 end

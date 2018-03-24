@@ -16,12 +16,12 @@ class NavBar extends Component {
           { user.role === 'admin' &&
             <Menu.Item onClick={ () => history.push( '/edit' ) }>Edit Menu</Menu.Item>
           }
+
           <Menu.Item
             position='right'
             name='Logout'
             onClick={ () => dispatch( handleLogout( history ) ) }
           />
-        <Link to='/cart' style={{ color: '#000000'}}>View Cart</Link>
         </Menu.Menu>
       );
     }
@@ -66,6 +66,9 @@ class NavBar extends Component {
     return (
       <Menu pointing secondary borderless as={ Transparent }>
         { this.centerNav() }
+        <Link to='/cart'>
+          <Menu.Item name='View Cart' position="right" />
+        </Link>
         { this.rightNavs() }
       </Menu>
     );

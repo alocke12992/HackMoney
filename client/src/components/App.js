@@ -32,11 +32,11 @@ class App extends Component {
             <Route exact path='/reservations' component={ Reservations } />
             <Route exact path='/location' component={ Locations } />
             <Route exact path='/philosophy' component={ Philosophy } />
+            <Route exact path='/cart' component={ Cart } />
             <AdminRoute exact path='/edit' component={ EditMenu } />
             <AdminRoute exact path='/edit/:id' component={ AdminMenuItem } />
             <AuthRoute exact path='/login' component={ Login } />
             <AuthRoute exact path='/register' component={ Register } />
-            <ProtectedRoute exact path='/cart' component={ Cart } />
             <Route component={ NoMatch } />
           </Switch>
         </FetchUser>

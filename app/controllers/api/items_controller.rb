@@ -1,13 +1,13 @@
 class Api::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :index_cart, :destroy]
-
+  before_action :authenticate_user!, only: [:update_cart]
 
   def index
     render json: Item.all.order(created_at: :desc)
   end
 
   def index_cart
-    render json: current_user.items
+    render json: current_user.cart_items
   end
 
   def show
@@ -22,6 +22,12 @@ class Api::ItemsController < ApplicationController
       render json: { errors: item.errors.full_messages.join(',') }, status: 422
     end
   end
+
+  def update_cart
+    current_user.cart_items << params[:id].to_i
+    current_user.save
+  end 
+
 
   def update
     if @item.update(item_params)
