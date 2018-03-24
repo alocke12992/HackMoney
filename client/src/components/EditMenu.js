@@ -3,8 +3,8 @@ import EditItemForm from './EditItemForm';
 import mainBackground from '../images/mainBackground.jpg';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getItems, addItems, editItems, deleteItems } from '../actions/items';
-import { Segment, Card, Form, Header, Button, Divider } from 'semantic-ui-react';
+import { getItems } from '../actions/items';
+import { Segment, Card, Header, Button, Divider } from 'semantic-ui-react';
 
 class EditMenu extends React.Component {
   state = { category: '', showForm: false };
@@ -36,7 +36,6 @@ class EditMenu extends React.Component {
   }
 
   render() {
-    const { items } = this.props
     const { showForm } = this.state
     return (
       <Segment textAlign='center' style={ styles.base }>

@@ -26,10 +26,10 @@ class NavBar extends Component {
     return (
       <Menu.Menu position='right'>
         <Link to='/register'>
-          <Menu.Item name='Register' />
+          <Menu.Item name='Sign Up' />
         </Link>
         <Link to='/login'>
-          <Menu.Item name='Login' />
+          <Menu.Item name='Sign In' />
         </Link>
       </Menu.Menu>
     );
@@ -38,7 +38,7 @@ class NavBar extends Component {
   centerNav = () => {
     return (
       <Menu.Menu>
-        <Link to='/'>
+        <Link to='/philosophy'>
           <Menu.Item name='Philosophy' />
         </Link>
         <Link to='/menu'>
@@ -50,10 +50,10 @@ class NavBar extends Component {
             size='small'
           />
         </Link>
-        <Link to='/'>
+        <Link to='/reservations'>
           <Menu.Item name='Reservations' />
         </Link>
-        <Link to='/'>
+        <Link to='/location'>
           <Menu.Item name='Location' />
         </Link>
       </Menu.Menu>
@@ -73,12 +73,6 @@ class NavBar extends Component {
 const Transparent = styled.div`
   background: transparent !important; 
 `
-var styles = {
-  base: {
-    background: '#dbd5d7'
-  }
-}
-
 
 const mapStateToProps = state => {
   return { user: state.user };

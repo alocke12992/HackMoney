@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import EditItemForm from './EditItemForm';
 import { deleteItem } from '../actions/items';
 
-class MenuItem extends React.Component {
+class AdminMenuItem extends React.Component {
   state = { showForm: false }
 
   toggleForm = () => {
@@ -67,4 +67,4 @@ const mapStateToProps = ( state, props ) => {
   return { item };
 };
 
-export default connect( mapStateToProps )( MenuItem );
+export default connect( mapStateToProps )( AdminMenuItem );

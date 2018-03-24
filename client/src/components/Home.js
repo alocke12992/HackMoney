@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Header, Button, Segment, Container, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Menu from './Menu';
 import logo from '../images/logo.png';
 import background from '../images/background.jpg';
 
