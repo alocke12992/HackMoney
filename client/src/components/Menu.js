@@ -12,11 +12,6 @@ class Menu extends React.Component {
 
   componentDidMount() {
     this.props.dispatch( getItems() )
-    axios.get( '/api/items' )
-      .then( res => {
-        this.setState( { items: res.data } )
-        this.props.dispatch( { type: 'HEADERS', headers: res.headers } );
-      } );
   }
 
   addCart = ( id ) => {
@@ -42,7 +37,7 @@ class Menu extends React.Component {
         </Card.Content>
         <Card.Content extra>
           <Button basic
-            onClick={ () => this.addCart( items.id ) }>Add to cart</Button>
+            onClick={ () => this.addCart( item.id ) }>Add to cart</Button>
         </Card.Content>
       </Card >
     )
@@ -67,7 +62,6 @@ var styles = {
     background: `url(${ mainBackground }) no-repeat center fixed`,
     backgroundSize: 'cover',
     padding: 0,
-    height: '100vh'
   },
   text: {
     color: 'white'
