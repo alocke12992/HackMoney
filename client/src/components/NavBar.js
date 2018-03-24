@@ -17,9 +17,11 @@ class NavBar extends Component {
             <Menu.Item onClick={ () => history.push( '/edit' ) }>Edit Menu</Menu.Item>
           }
           <Menu.Item
+            position='right'
             name='Logout'
             onClick={ () => dispatch( handleLogout( history ) ) }
           />
+        <Link to='/cart' style={{ color: '#000000'}}>View Cart</Link>
         </Menu.Menu>
       );
     }
@@ -71,7 +73,7 @@ class NavBar extends Component {
 }
 
 const Transparent = styled.div`
-  background: transparent !important; 
+  background: transparent !important;
 `
 
 const mapStateToProps = state => {

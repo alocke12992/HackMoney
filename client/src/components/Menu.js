@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items';
 import { Segment, Card, Button, Divider, Image } from 'semantic-ui-react';
+import axios from 'axios';
 
 const defaultImage = 'https://iqsresponsive-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/landscape-1471344808-avocado-burger-buns-680x340.jpg'
 
@@ -11,6 +12,12 @@ class Menu extends React.Component {
 
   componentDidMount() {
     this.props.dispatch( getItems() )
+  }
+
+  addCart = (id) => {
+  let { items } = this.state;
+  axios.put(`/api/items/${id}`)
+    .then( () => this.setState({ cats: items.filter( c => c.id !== id ) }) )
   }
 
   items = () => {
@@ -29,7 +36,8 @@ class Menu extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button basic>Add to cart</Button>
+          <Button basic
+            onClick={ () => this.addCart(items.id)}>Add to cart</Button>
         </Card.Content>
       </Card >
     )
@@ -47,7 +55,7 @@ class Menu extends React.Component {
 }
 
 const Transparent = styled.div`
-  background: transparent !important; 
+  background: transparent !important;
 `
 var styles = {
   base: {
