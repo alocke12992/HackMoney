@@ -19,9 +19,12 @@ gem 'puma', '~> 3.7'
 gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
+gem 'aws-sdk' 
+
 group :development, :test do
   gem 'faker'
   gem 'pry'
+  gem 'dotenv-rails'
 end
 
 group :development do
